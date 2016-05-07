@@ -12,6 +12,7 @@ const html = (literal, ...cooked) => {
     result += lit;
     result += cook;
   });
+  result += literal[literal.length - 1];
   return result;
 };
 
