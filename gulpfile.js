@@ -15,16 +15,8 @@ gulp.task('js', function () {
   .pipe(gulp.dest('./build'))
 });
 
-var sass = require('gulp-sass')
-
-gulp.task('styles', function () {
-  return gulp.src('./styles/style.scss')
-    .pipe(sass())
-    .pipe(gulp.dest('./build'));
-});
-
-gulp.task('default', ['js', 'styles']);
+gulp.task('default', ['js']);
 
 gulp.task('watch', function () {
-  return gulp.watch('./src/**/*.{js,scss}', ['default']);
+  return gulp.watch('./src/**/*.js', ['default']);
 });
