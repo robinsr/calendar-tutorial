@@ -16,10 +16,10 @@ const html = (literal, ...cooked) => {
   return result;
 };
 
-const controls = () => {
-  const curr = moment();
-  const next = moment().add(1, 'month');
-  const prev = moment().subtract(1, 'month');
+const controls = data => {
+  const curr = moment(data.iso);
+  const next = moment(data.iso).add(1, 'month');
+  const prev = moment(data.iso).subtract(1, 'month');
   return html`
     <div id="controls">
       <a class="item" href="#/${prev.format('MM')}/${prev.format('YYYY')}">Back one month</a>
@@ -29,4 +29,17 @@ const controls = () => {
   `;
 };
 
-export { controls };
+const day = data => html`
+  <li data-iso="${data.iso}">
+    <p class="date">${ moment(data.iso).format('D') }</p>
+  </li>
+`;
+
+const calendar = data => html`
+  ${controls(data)}
+  <ul id="calendar" class="full-width weeks-${data.weekCount}">
+    ${data.days.map(data => day(data))}
+  </ul>
+`;
+
+export { calendar };
